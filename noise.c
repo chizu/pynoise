@@ -67,7 +67,7 @@ pnoise2d(PyObject *self, PyObject *args) {
 }
 
 PyMethodDef methods[] = {
-    {"pnoise2d", pnoise2d, METH_VARARGS, "Calculate perlin noise for a coordinate."},
+    {"pnoise2d", pnoise2d, METH_VARARGS, "Calculate perlin noise for a 2D coordinate."},
     {NULL, NULL, 0, NULL}
 };
 
