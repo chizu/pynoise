@@ -5,14 +5,6 @@ float dot2(const double * m, double2 n) {
 	return m[0]*n.x + m[1]*n.y;
 }
 
-float dot3(const double * m, double3 n) {
-	return m[0]*n.x + m[1]*n.y + m[2]*n.z;
-}
-
-float dot4(const double * m, double4 n) {
-	return m[0]*n.x + m[1]*n.y + m[2]*n.z + m[3]*n.w;
-}
-
 static PyObject *
 snoise2d(PyObject *self, PyObject *args) {
 	double x, y;
