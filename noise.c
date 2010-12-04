@@ -39,13 +39,31 @@ double interpolated(double x, double y) {
 	return interpolate(i1, i2, frac_y);
 }
 
+double perlin2d(double x, double y, int octaves) {
+	int n;
+	double value = 0;
+    double amplitude = 1;
+	double lacunarity = 2;
+	double persistence = 0.3;
+
+	for (n = 0; n < octaves; n++) {
+		value += interpolated(x, y) * amplitude;
+		x *= lacunarity;
+		y *= lacunarity;
+		amplitude *= persistence;
+	}
+	
+	return value;
+}
+
 static PyObject *
 pnoise2d(PyObject *self, PyObject *args) {
 	double x, y;
-	if (!PyArg_ParseTuple(args, "d|d", &x, &y))
+	int octaves = 8;
+	if (!PyArg_ParseTuple(args, "dd|i", &x, &y, &octaves))
 		return NULL;
 
-	return Py_BuildValue("d", interpolated(x, y));
+	return Py_BuildValue("d", perlin2d(x, y, octaves));
 }
 
 PyMethodDef methods[] = {
