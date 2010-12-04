@@ -5,4 +5,4 @@ Based off of examples by [Hugo Elias](http://freespace.virgin.net/hugo.elias/mod
 ## Usage
     import noise, itertools
     for x,y in itertools.product(range(256), range(256)):
-      noise.pnoise2d(x,y,[octaves])
+      noise.pnoise2d(x,y,[octaves,seed])

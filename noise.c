@@ -1,8 +1,10 @@
 #include <Python.h>
 
+uint seed = 1;
+
 double noise(int x, int y) {
     int n = x + y * 57;
-	n = (n << 13) ^ n;
+	n = (n << 13) ^ (n * seed);
 	return (1.0 - ((n * (n * n * 15731 + 789221) + 1376312589) & 0x7fffffff) /  1073741824.0);
 }
 
@@ -60,8 +62,13 @@ static PyObject *
 pnoise2d(PyObject *self, PyObject *args) {
 	double x, y;
 	int octaves = 8;
-	if (!PyArg_ParseTuple(args, "dd|i", &x, &y, &octaves))
+	if (!PyArg_ParseTuple(args, "dd|ii", &x, &y, &octaves, &seed))
 		return NULL;
+
+	if (seed == 0) {
+		// The noise is weird if you set the seed to 0
+		seed = 42;
+	}
 
 	return Py_BuildValue("d", perlin2d(x, y, octaves));
 }
