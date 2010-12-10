@@ -1,6 +1,6 @@
 #include <Python.h>
 
-uint seed = 1;
+ulong seed = 1;
 
 double noise(int x, int y) {
     int n = x + y * 57;
@@ -62,7 +62,7 @@ static PyObject *
 pnoise2d(PyObject *self, PyObject *args) {
 	double x, y;
 	int octaves = 8;
-	if (!PyArg_ParseTuple(args, "dd|ii", &x, &y, &octaves, &seed))
+	if (!PyArg_ParseTuple(args, "dd|il", &x, &y, &octaves, &seed))
 		return NULL;
 
 	if (seed == 0) {
